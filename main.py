@@ -6,6 +6,8 @@ import random
 # escolher local específico "taverna"
 # escolher local "capital"
 
+#variaveis
+
 item=['flor','cordão','balde']
 contratante=['Moça','Padre','Construtor']
 local=['Capital','Campos Verdejantes','Gabara']
@@ -16,6 +18,7 @@ contratante_selec=random.choice(contratante)
 local_selec=random.choice(local)
 localE_selec=random.choice(localE)
 
+#listar itens cadastrados
 def mostrar_item():
     cont=1
     for itens in item:
@@ -23,7 +26,7 @@ def mostrar_item():
         print(f'{cont}. {nome_item}')
         cont+=1
         
-
+#escolha de itens
 def escolher_item():
     try:
        opcao_escolhida=int(input('Escolha o item que irá entregar'))
@@ -33,10 +36,11 @@ def escolher_item():
         print('tchau')
 
 
-
+#randomização
 def mostrar_random():
     print('Entregue {} para {} na {} na {}.'.format(item_selec,contratante_selec,local_selec,localE_selec))
 
+#testes
 mostrar_item()
 print("-- -- --")
 mostrar_random()
