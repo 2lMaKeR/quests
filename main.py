@@ -4,6 +4,9 @@ import random
 
 #TASKS:
 
+# UI cadastrar
+# terminal cleaner
+
 # -- -- -- -- -- --
 #variaveis
 
@@ -48,6 +51,7 @@ def mostrar_random():
 #listar itens cadastrados
 def mostrar_item():
     cont_it=1
+    print('Selecione 0 para retornar as opções.\n')
     for itens in item:
         nome_item=itens
         print(f'{cont_it}. {nome_item}')
@@ -62,6 +66,8 @@ def escolher_item():
         item_selec[0]=(its-1)
         pr=(item[item_selec[0]]).upper()
         print('Item {} selecionado!!'.format(pr))
+    elif its==0:
+        voltando_ao_lock()
     else:
         print('\nOpção inválida!\n')
         escolher_item()
@@ -81,29 +87,38 @@ def lock_itens():
 #locks
 
 def exibir_locks():
-    print('1. Lockar itens')
-    print('2. Lockar contratante')
-    print('3. Lockar Local')
-    print('4. Lockar Local específico')
-    print('5. Sair...')
+    print('1. Lockar tipo de quest')
+    print('2. Lockar itens')
+    print('3. Lockar contratante')
+    print('4. Lockar Local')
+    print('5. Lockar Local específico')
+    print('6. Voltar...')
 
-def selecionar_opcoes():
+def selecionar_locks():
     try:
         opcao_escolhida=int(input('Escolha uma opção: '))
         if opcao_escolhida==1:
-            lock_itens()
-        elif opcao_escolhida==2:
             print('mostrar opcoes de lock')
+        elif opcao_escolhida==2:
+            lock_itens()
         elif opcao_escolhida==3:
             print('mostrar opcoes de lock')
         elif opcao_escolhida==4:
             print('mostrar opcoes de lock')
         elif opcao_escolhida==5:
-            print('voltando ao menu...')
+            print('mostrar opcoes de lock')
+        elif opcao_escolhida==6:
+            voltando_ao_menu()
         else:
-            print('opcao invalida')
+            opcao_invalida(lock)
     except:
-        print('opcao invalida')
+        opcao_invalida(lock)
+
+
+#conjunto locks
+def locks():
+    exibir_locks()
+    selecionar_locks()
 
 
 # -- -- --
@@ -121,22 +136,54 @@ def selecionar_opcoes():
         if opcao_escolhida==1:
             mostrar_random()
         elif opcao_escolhida==2:
-            print('mostrar opcoes de lock')
+            locks()
         elif opcao_escolhida==3:
             print('mostrar opcoes de lock')
         elif opcao_escolhida==4:
-            print('finalizando programa...')
+            finalizar_app()
         else:
-            print('opcao invalida')
+            opcao_invalida(menu)
     except:
-        print('opcao invalida')
+        opcao_invalida(menu)
     
+
+# -- -- --
+#voltar e finalizando
+
+#voltar ao menu
+def voltando_ao_menu():
+    input('\nDigite qualquer tecla para voltar ao menu principal...')
+    main()
+
+#voltar ao lockar opçoes
+def voltando_ao_lock():
+    input('\nDigite qualquer tecla para voltar ao lockar itens...')
+    locks()
+
+#reiniciando sessões por invalidez
+def opcao_invalida(cat):
+    print('\nOpção inválida!\n')
+    input('reiciando opções...\n')
+    #adicionar clear
+    if cat=='menu':
+        main()
+    elif cat=='lock':
+        locks()
+    else:
+        print('\nERRO {OPÇÃO INVÁLIDA}!!')
+
+#finalizar app
+def finalizar_app():
+    print('\n########################\n')
+    print('Encerrando o programa...\n')
+
 
 #-- -- --
 #famigerada main
 def main():
     exibir_opcoes()
     selecionar_opcoes()
+
 
 # -- -- --
 #iniciando
