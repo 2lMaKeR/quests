@@ -1,10 +1,6 @@
 import random
 
-# escolher tipo de missão nosso caso "entregar" # esse é o próximo passo
-# escolher item no caso "flor"
-# escolher receptor ""
-# escolher local específico "taverna"
-# escolher local "capital"
+# lock em caracteristicas
 
 #variaveis
 
@@ -13,34 +9,58 @@ contratante=['Moça','Padre','Construtor']
 local=['Capital','Campos Verdejantes','Gabara']
 localE=['residência Mill','Igreja','ponte Strefield']
 
-item_selec=random.choice(item)
-contratante_selec=random.choice(contratante)
-local_selec=random.choice(local)
-localE_selec=random.choice(localE)
+#randomizer
+item_random=random.choice(item)
+contratante_random=random.choice(contratante)
+local_random=random.choice(local)
+localE_random=random.choice(localE)
 
-#listar itens cadastrados
-def mostrar_item():
-    cont=1
-    for itens in item:
-        nome_item=itens
-        print(f'{cont}. {nome_item}')
-        cont+=1
-        
-#escolha de itens
-def escolher_item():
-    try:
-       opcao_escolhida=int(input('Escolha o item que irá entregar'))
-       if opcao_escolhida==1:
-           print('oi')
-    except:
-        print('tchau')
+#lock
+its=0
+item_selec=[its]
 
+cts=0
+contratante_selec=[cts]
+
+lcs=0
+local_selec=[lcs]
+
+lces=0
+localE_selec=[lces]
+
+# -- -- --
+#concluido
 
 #randomização
 def mostrar_random():
-    print('Entregue {} para {} na {} na {}.'.format(item_selec,contratante_selec,local_selec,localE_selec))
+    print('Entregue {} para {} na {} na {}.'.format(item_random,contratante_random,local_random,localE_random))
+
+# -- -- --
+#teste
+
+#listar itens cadastrados
+def mostrar_item():
+    cont_it=1
+    for itens in item:
+        nome_item=itens
+        print(f'{cont_it}. {nome_item}')
+        cont_it+=1
+    
+
+#escolha de itens
+def escolher_item():
+    verd=len(item)
+    its=int(input('Escolha o item que irá fazer a quest: '))
+    if its<=verd:
+        item_selec[0]=(its-1)
+        pr=(item[item_selec[0]]).upper()
+        print('Item {} selecionado!!'.format(pr))
+    else:
+        print('Opção inválida!\n')
+        escolher_item()
 
 #testes
 mostrar_item()
+escolher_item()
 print("-- -- --")
-mostrar_random()
+#mostrar_random()
