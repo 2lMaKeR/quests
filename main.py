@@ -4,9 +4,9 @@ import random
 
 #TASKS:
 
-# UI cadastrar
 # terminal cleaner
 # melhorar UI
+# ajustar randomizador para aceitar variaveis fixadas e desfixar após o uso
 
 #quando escolher randomizar, ele tem que ler quais vars são verdadeiras para definir se usará uma var_random ou var_selec
 
@@ -47,7 +47,7 @@ volte_ao='\nDigite qualquer tecla para voltar ao {}...'
 
 #cadastro
 novo_cad='Qual novo {} gostaria de cadastrar: '
-adin_lock=' {} foi adicionado a seleção!! Agora disponível para lock.'
+adin_lock=' {} foi adicionado a seleção!! Agora disponível para fixar.'
 ret_cad='Retornando as escolhas de cadastro...'
 
 
