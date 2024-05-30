@@ -6,14 +6,17 @@ import random
 
 # UI cadastrar
 # terminal cleaner
+# melhorar UI
+
+#quando escolher randomizar, ele tem que ler quais vars são verdadeiras para definir se usará uma var_random ou var_selec
 
 # -- -- -- -- -- --
 #variaveis
 
-item=['flor','cordão','balde']
+item=['Flor','Cordão','Balde']
 contratante=['Moça','Padre','Construtor']
 local=['Capital','Campos Verdejantes','Gabara']
-local_esp=['residência Mill','Igreja','ponte Strefield']
+local_esp=['Residência Mill','Igreja','Ponte Strefield']
 
 #randomizer
 item_random=random.choice(item)
@@ -35,8 +38,20 @@ lces=0
 local_esp_selec=[lces]
 
 # -- -- --
-#concluido
+#variaveis de texto
 
+#volta e finaliza
+retorno_ops='Selecione 0 para retornar as opções.\n'
+op_inval='\nOpção inválida!\n'
+volte_ao='\nDigite qualquer tecla para voltar ao {}...'
+
+#cadastro
+novo_cad='Qual novo {} gostaria de cadastrar: '
+adin_lock=' {} foi adicionado a seleção!! Agora disponível para lock.'
+ret_cad='Retornando as escolhas de cadastro...'
+
+
+# -- -- --
 #randomização
 def mostrar_random():
     print('\n########################\n')
@@ -46,66 +61,77 @@ def mostrar_random():
 
 
 # -- -- --
-#itens
+#cadastrar 2
+def cadastrar_cad(cad_cat):
+    if cad_cat=='Item':
+        novo_item=str(input(novo_cad.format(cad_cat)))
+        item.append(novo_item)
+        print(cad_cat+adin_lock.format(novo_item))
+        input(ret_cad)
+        cads()
 
-#cadastrar novo item
-def cadastrar_item():
-    novo_item=str(input('Qual novo item gostaria de cadastrar: '))
-    item.append(novo_item)
+    elif cad_cat=='Contrante':
+        novo_contratante=str(input(novo_cad.format(cad_cat)))
+        contratante.append(novo_contratante)
+        print(cad_cat+adin_lock.format(novo_contratante))
+        input(ret_cad)
+        cads()
 
-#mostrando opcoes de lock de itens
-def lock_itens():
-    mostrar_item()
-    escolher_item()
+    elif cad_cat=='Local':
+        novo_local=str(input(novo_cad.format(cad_cat)))
+        local.append(novo_local)
+        print(cad_cat+adin_lock.format(novo_local))
+        input(ret_cad)
+        cads()
 
-# -- -- --
-#contratante
+    elif cad_cat=='Local específico':
+        novo_local_esp=str(input(novo_cad.format(cad_cat)))
+        local_esp.append(novo_local_esp)
+        print(cad_cat+adin_lock.format(novo_local_esp))
+        input(ret_cad)
+        cads()
 
-#cadastrar novo item
-def cadastrar_contratante():
-    novo_contratante=str(input('Qual novo contratante gostaria de cadastrar: '))
-    contratante.append(novo_contratante)
-
-#mostrando opcoes de lock de itens
-def lock_contratantes():
-    mostrar_contratante()
-    escolher_contratante()
-
-
-# -- -- --
-#local
-
-#listar itens cadastrados
-
-#cadastrar novo item
-def cadastrar_local():
-    novo_local=str(input('Qual novo local gostaria de cadastrar: '))
-    local.append(novo_local)
-
-#mostrando opcoes de lock de itens
-def lock_local():
-    mostrar_local()
-    escolher_local()
+    else:
+        print('#######################')
+        print('ERRO def cadastrar_cad')
+        print('#######################')
 
 
 # -- -- --
-#local E
+#cadastrar
+def exibir_cad():
+    print('Selecione a variável de que desejar cadastrar:')
+    print('1. Item')
+    print('2. Contratante')
+    print('3. Local')
+    print('4. Local específico')
+    print('5. Voltar...')
 
-#listar itens cadastrados
+def selecionar_cad():
+    try:
+        opcao_escolhida=int(input('Escolha uma opção: '))
+        if opcao_escolhida==1:
+            cadastrar_cad('Item')
+        elif opcao_escolhida==2:
+            cadastrar_cad('Contratante')
+        elif opcao_escolhida==3:
+            cadastrar_cad('Local')
+        elif opcao_escolhida==4:
+            cadastrar_cad('Local especifico')
+        elif opcao_escolhida==5 or opcao_escolhida==0:
+            voltando('menu principal')
+        else:
+            opcao_invalida('cad') #adiconar voltar cad
+    except:
+        opcao_invalida('cad') #adicioanr voltar cad
 
-#cadastrar novo item
-def cadastrar_local_esp():
-    novo_local_esp=str(input('Qual novo local específico gostaria de cadastrar: '))
-    local_esp.append(novo_local_esp)
-
-#mostrando opcoes de lock de itens
-def lock_local_esp():
-    mostrar_local_esp()
-    escolher_local_esp()
-
+#conjunto cads
+def cads():
+    exibir_cad()
+    selecionar_cad()
 
 # -- -- --
-#locks
+#locks 2
 def mostrar_locks(lock_cat):
     if lock_cat=='item':
         cont_it=1
@@ -206,7 +232,6 @@ def escolher_locks(lock_cat):
         print('ERRO def escolher_locks')
         print('#######################')
 
-#mostrando opcoes de lock de itens
 def fixar_locks(look_cat):
     mostrar_locks(look_cat)
     escolher_locks(look_cat)
@@ -243,7 +268,6 @@ def selecionar_locks():
     except:
         opcao_invalida('lock')
 
-
 #conjunto locks
 def locks():
     exibir_locks()
@@ -256,18 +280,18 @@ def locks():
 def exibir_opcoes():
     print('1. RAnDomIzaR')
     print('2. Lockar opções')
-    print('3. Cadastrar variações')
+    print('3. Cadastrar opções')
     print('4. Sair...')
 
 def selecionar_opcoes():
     try:
         opcao_escolhida=int(input('Escolha uma opção: '))
         if opcao_escolhida==1:
-            mostrar_random()
+            mostrar_random() #corrigir com alterações de lock
         elif opcao_escolhida==2:
             locks()
         elif opcao_escolhida==3:
-            print('mostrar opcoes de lock')
+            cads()
         elif opcao_escolhida==4 or opcao_escolhida==0:
             finalizar_app()
         else:
@@ -282,10 +306,10 @@ def selecionar_opcoes():
 #voltando
 def voltando(volta):
     if volta=='menu principal':
-        input('\nDigite qualquer tecla para voltar ao {}...'.format(volta))
+        input(volte_ao.format(volta))
         main()
     elif volta=='lockar opções':
-        input('\nDigite qualquer tecla para voltar ao {}...'.format(volta))
+        input(volte_ao.format(volta))
         locks()
     else:
         print('#######################')
@@ -296,11 +320,13 @@ def voltando(volta):
 #reiniciando sessões por invalidez
 def opcao_invalida(cat):
     print('\nOpção inválida!\n')
-    #adicionar clear
+    #adicionar clear -----------------------------------------------------------------------------------------
     if cat=='menu':
         voltando('menu principal')
     elif cat=='lock':
         voltando('lockar opções')
+    elif cat=='cad':
+        voltando('cad')
     else:
         print('#######################')
         print('ERRO def opcao_invalida')
@@ -310,9 +336,6 @@ def opcao_invalida(cat):
 def finalizar_app():
     print('\n########################\n')
     print('Encerrando o programa...\n')
-
-retorno_ops='Selecione 0 para retornar as opções.\n'
-op_inval='\nOpção inválida!\n'
 
 
 #-- -- --
