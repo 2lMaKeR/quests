@@ -26,15 +26,19 @@ local_esp_random=random.choice(local_esp)
 
 #lock
 its=0
+selec_item=False
 item_selec=[its]
 
 cts=0
+selec_contratante=False
 contratante_selec=[cts]
 
 lcs=0
+selec_local=False
 local_selec=[lcs]
 
 lces=0
+selec_local_esp=False
 local_esp_selec=[lces]
 
 # -- -- --
@@ -52,12 +56,57 @@ ret_cad='Retornando as escolhas de cadastro...'
 
 
 # -- -- --
-#randomização
-def mostrar_random():
+def randomizando():
     print('\n########################\n')
     print('Sua quest será...\n')
     print('Entregue {} para {} na {} na {}.'.format(item_random,contratante_random,local_esp_random,local_random))
     print('\n########################')
+
+def origin_random():
+    global item_random
+    global contratante_random
+    global local_random
+    global local_esp_random
+
+    item_random=random.choice(item)
+    contratante_random=random.choice(contratante)
+    local_random=random.choice(local)
+    local_esp_random=random.choice(local_esp)
+
+    global selec_item
+    global selec_contratante
+    global selec_local
+    global selec_local_esp
+
+    selec_item=False
+    selec_contratante=False
+    selec_local=False
+    selec_local_esp=False
+
+
+#randomização
+def mostrar_random():
+    global item_random
+    global contratante_random
+    global local_random
+    global local_esp_random
+    if selec_item==True:
+        item_random=item[item_selec[0]]
+    if selec_contratante==True:
+        contratante_random=contratante[contratante_selec[0]]
+    if selec_local==True:
+        local_random=local[local_selec[0]]
+    if selec_local_esp==True:
+        local_esp_random=local_esp[local_esp_selec[0]]
+    randomizando()
+    origin_random()
+    voltando('menu principal')
+
+#randomização agora vai
+#ele tem que lockar com item_selec[0] no objeto escolhido
+#e item_random vai virar o item_selec[0]
+#dai vai gerar a quest e vai virar o random de novo
+#então se ele rodar o lock,  ele automaticamente vai colar o item_selec no item_random (vulgo item_random=item_selec[0])
 
 
 # -- -- --
@@ -121,9 +170,9 @@ def selecionar_cad():
         elif opcao_escolhida==5 or opcao_escolhida==0:
             voltando('menu principal')
         else:
-            opcao_invalida('cad') #adiconar voltar cad
+            opcao_invalida('cad')
     except:
-        opcao_invalida('cad') #adicioanr voltar cad
+        opcao_invalida('cad')
 
 #conjunto cads
 def cads():
@@ -179,20 +228,23 @@ def escolher_locks(lock_cat):
             item_selec[0]=(its-1)
             pr=(item[item_selec[0]]).upper()
             print('Item {} selecionado!!'.format(pr))
+            global selec_item
+            selec_item=True
             voltando('lockar opções')
         elif its==0:
             voltando('lockar opções')
         else:
             print(op_inval)
             escolher_locks('item')
-
     elif lock_cat=='contratante':
         verd=len(contratante)
-        its=int(input('Escolha o contratante que irá fazer a quest: '))
+        cts=int(input('Escolha o contratante que irá fazer a quest: '))
         if cts<=verd and cts>0:
             contratante_selec[0]=(cts-1)
             pr=(contratante[contratante_selec[0]]).upper()
             print('Contratante {} selecionado!!'.format(pr))
+            global selec_contratante
+            selec_contratante=True
             voltando('lockar opções')
         elif its==0:
             voltando('lockar opções')
@@ -207,6 +259,8 @@ def escolher_locks(lock_cat):
             local_selec[0]=(lcs-1)
             pr=(local[local_selec[0]]).upper()
             print('Local {} selecionado!!'.format(pr))
+            global selec_local
+            selec_local=True
             voltando('lockar opções')
         elif its==0:
             voltando('lockar opções')
@@ -221,6 +275,8 @@ def escolher_locks(lock_cat):
             local_esp_selec[0]=(lces-1)
             pr=(local_esp[local_esp_selec[0]]).upper()
             print('Local específico {} selecionado!!'.format(pr))
+            global selec_local_esp
+            selec_local_esp=True
             voltando('lockar opções')
         elif its==0:
             voltando('lockar opções')
