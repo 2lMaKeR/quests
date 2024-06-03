@@ -1,4 +1,5 @@
 import random
+import os
 
 # -- -- -- -- -- --
 
@@ -6,9 +7,6 @@ import random
 
 # terminal cleaner
 # melhorar UI
-# ajustar randomizador para aceitar variaveis fixadas e desfixar após o uso
-
-#quando escolher randomizar, ele tem que ler quais vars são verdadeiras para definir se usará uma var_random ou var_selec
 
 # -- -- -- -- -- --
 #variaveis
@@ -102,13 +100,6 @@ def mostrar_random():
     origin_random()
     voltando('menu principal')
 
-#randomização agora vai
-#ele tem que lockar com item_selec[0] no objeto escolhido
-#e item_random vai virar o item_selec[0]
-#dai vai gerar a quest e vai virar o random de novo
-#então se ele rodar o lock,  ele automaticamente vai colar o item_selec no item_random (vulgo item_random=item_selec[0])
-
-
 # -- -- --
 #cadastrar 2
 def cadastrar_cad(cad_cat):
@@ -176,6 +167,7 @@ def selecionar_cad():
 
 #conjunto cads
 def cads():
+    cleaner()
     exibir_cad()
     selecionar_cad()
 
@@ -289,6 +281,7 @@ def escolher_locks(lock_cat):
         print('#######################')
 
 def fixar_locks(look_cat):
+    cleaner()
     mostrar_locks(look_cat)
     escolher_locks(look_cat)
 
@@ -308,7 +301,8 @@ def selecionar_locks():
     try:
         opcao_escolhida=int(input('Escolha uma opção: '))
         if opcao_escolhida==1:
-            print('mostrar opcoes de lock')
+            print('Em breve atts...')
+            voltando('lockar opções')
         elif opcao_escolhida==2:
             fixar_locks('item')
         elif opcao_escolhida==3:
@@ -326,6 +320,7 @@ def selecionar_locks():
 
 #conjunto locks
 def locks():
+    cleaner()
     exibir_locks()
     selecionar_locks()
 
@@ -359,13 +354,16 @@ def selecionar_opcoes():
 # -- -- --
 #voltar e finalizando  
 
+def cleaner():
+    os.system('cls')
+
 #voltando
 def voltando(volta):
+    input(volte_ao.format(volta))
+    cleaner()
     if volta=='menu principal':
-        input(volte_ao.format(volta))
         main()
     elif volta=='lockar opções':
-        input(volte_ao.format(volta))
         locks()
     else:
         print('#######################')
@@ -376,7 +374,6 @@ def voltando(volta):
 #reiniciando sessões por invalidez
 def opcao_invalida(cat):
     print('\nOpção inválida!\n')
-    #adicionar clear -----------------------------------------------------------------------------------------
     if cat=='menu':
         voltando('menu principal')
     elif cat=='lock':
@@ -397,6 +394,7 @@ def finalizar_app():
 #-- -- --
 #famigerada main
 def main():
+    cleaner()
     exibir_opcoes()
     selecionar_opcoes()
 
