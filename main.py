@@ -5,7 +5,7 @@ import os
 
 #TASKS:
 
-# melhorar UI -- colocar título no cleaner()
+# melhorar UI - ajustar espaços em cada etapa
 # adicionar mais quests
     # colocar array quests
         # em cada slot uma quest
