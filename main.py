@@ -90,7 +90,18 @@ local_esp_random=random.choice(local_esp)
 def randomizando():
     print(ast)
     print(apresentando_quest)
-    print(quest[quest_random]['texto'].format(item_random,contratante_random,local_esp_random,local_random))
+    match quest_random:
+        case 0: # entregar
+            print(quest[quest_random]['texto'].format(item_random,contratante_random,local_esp_random,local_random))
+        case 1: # eliminar
+            print(quest[quest_random]['texto'].format(contratante_random,local_random))
+        case 2: # construir
+            print(quest[quest_random]['texto'].format(local_esp_random,local_random))
+        case _:
+            print(ast)
+            print('ERRO def randomizando')
+            print(ast)
+
     print(ast)
 
 def origin_random():
