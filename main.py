@@ -6,7 +6,7 @@ import os
 #TASKS:
 
 # melhorar UI - ajustar espaços em cada etapa
-# melhorar sistemas de format da quest selecionada
+# colocar \n em todos os inputs para separar das opções de escolha
 
 
 # -- -- -- -- -- --
@@ -171,7 +171,7 @@ def cadastrar_cad(cad_cat):
         input(ret_cad)
         cads()
 
-    elif cad_cat=='Contrante':
+    elif cad_cat=='Contratante':
         novo_contratante=str(input(novo_cad.format(cad_cat)))
         contratante.append(novo_contratante)
         print(cad_cat+adin_lock.format(novo_contratante))
@@ -218,7 +218,7 @@ def selecionar_cad():
         elif opcao_escolhida==3:
             cadastrar_cad('Local')
         elif opcao_escolhida==4:
-            cadastrar_cad('Local especifico')
+            cadastrar_cad('Local específico')
         elif opcao_escolhida==5 or opcao_escolhida==0:
             voltando('menu principal')
         else:
