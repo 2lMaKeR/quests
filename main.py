@@ -5,8 +5,16 @@ import os
 
 #TASKS:
 
-# terminal cleaner
-# melhorar UI
+# melhorar UI -- colocar título no cleaner()
+# adicionar mais quests
+    # colocar array quests
+        # em cada slot uma quest
+            # separando direitinho o diretório de cada variavel a ser aplicada
+    #colocar o qts
+    #selec_quest
+    #quest_selec
+    #quest_random
+
 
 # -- -- -- -- -- --
 #variaveis
@@ -42,6 +50,8 @@ local_esp_selec=[lces]
 # -- -- --
 #variaveis de texto
 
+ast='\n########################\n'
+
 #volta e finaliza
 retorno_ops='Selecione 0 para retornar as opções.\n'
 op_inval='\nOpção inválida!\n'
@@ -52,13 +62,20 @@ novo_cad='Qual novo {} gostaria de cadastrar: '
 adin_lock=' {} foi adicionado a seleção!! Agora disponível para fixar.'
 ret_cad='Retornando as escolhas de cadastro...'
 
+#título
+
+quest_entregar='Entregue {} para {} na {} na {}.'
 
 # -- -- --
 def randomizando():
-    print('\n########################\n')
+    global item_random
+    global contratante_random
+    global local_random
+    global local_esp_random
+    print(ast)
     print('Sua quest será...\n')
-    print('Entregue {} para {} na {} na {}.'.format(item_random,contratante_random,local_esp_random,local_random))
-    print('\n########################')
+    print(quest_entregar.format(item_random,contratante_random,local_esp_random,local_random))
+    print(ast)
 
 def origin_random():
     global item_random
@@ -132,9 +149,9 @@ def cadastrar_cad(cad_cat):
         cads()
 
     else:
-        print('#######################')
+        print(ast)
         print('ERRO def cadastrar_cad')
-        print('#######################')
+        print(ast)
 
 
 # -- -- --
@@ -207,9 +224,9 @@ def mostrar_locks(lock_cat):
             cont_it+=1
 
     else:
-        print('#######################')
+        print(ast)
         print('ERRO def mostrar_locks')
-        print('#######################')
+        print(ast)
 
 
 def escolher_locks(lock_cat):
@@ -276,9 +293,9 @@ def escolher_locks(lock_cat):
             print(op_inval)
             escolher_locks('local especifico')
     else:
-        print('#######################')
+        print(ast)
         print('ERRO def escolher_locks')
-        print('#######################')
+        print(ast)
 
 def fixar_locks(look_cat):
     cleaner()
@@ -338,7 +355,7 @@ def selecionar_opcoes():
     try:
         opcao_escolhida=int(input('Escolha uma opção: '))
         if opcao_escolhida==1:
-            mostrar_random() #corrigir com alterações de lock
+            mostrar_random()
         elif opcao_escolhida==2:
             locks()
         elif opcao_escolhida==3:
@@ -366,9 +383,9 @@ def voltando(volta):
     elif volta=='lockar opções':
         locks()
     else:
-        print('#######################')
+        print(ast)
         print('ERRO def voltando')
-        print('#######################')
+        print(ast)
 
 
 #reiniciando sessões por invalidez
@@ -381,13 +398,13 @@ def opcao_invalida(cat):
     elif cat=='cad':
         voltando('cad')
     else:
-        print('#######################')
+        print(ast)
         print('ERRO def opcao_invalida')
-        print('#######################')
+        print(ast)
 
 #finalizar app
 def finalizar_app():
-    print('\n########################\n')
+    print(ast)
     print('Encerrando o programa...\n')
 
 
