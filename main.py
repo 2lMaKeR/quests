@@ -8,6 +8,8 @@ import os
 # melhorar UI - ajustar espaços em cada etapa
 # colocar \n em todos os inputs para separar das opções de escolha
 
+## fazer o modulop de orientação a objetos para refatorar esse projeto em varios files
+## ou fazer novo projeto já com esse intuito
 
 # -- -- -- -- -- --
 #variaveis
