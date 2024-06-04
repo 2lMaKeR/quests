@@ -63,7 +63,11 @@ adin_lock=' {} foi adicionado a seleção!! Agora disponível para fixar.'
 ret_cad='Retornando as escolhas de cadastro...'
 
 #título
+titulo='\n     QUESTIONS WITH QUESTS     '
+divisorias='---------------------------------'
 
+#quests
+apresentando_quest='Sua quest será...\n'
 quest_entregar='Entregue {} para {} na {} na {}.'
 
 # -- -- --
@@ -73,7 +77,7 @@ def randomizando():
     global local_random
     global local_esp_random
     print(ast)
-    print('Sua quest será...\n')
+    print(apresentando_quest)
     print(quest_entregar.format(item_random,contratante_random,local_esp_random,local_random))
     print(ast)
 
@@ -373,6 +377,8 @@ def selecionar_opcoes():
 
 def cleaner():
     os.system('cls')
+    print(titulo)
+    print(divisorias)
 
 #voltando
 def voltando(volta):
