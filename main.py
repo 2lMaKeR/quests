@@ -6,29 +6,11 @@ import os
 #TASKS:
 
 # melhorar UI - ajustar espaços em cada etapa
-# adicionar mais quests
-    # colocar array quests
-        # em cada slot uma quest
-            # separando direitinho o diretório de cada variavel a ser aplicada
-    #colocar o qts
-    #selec_quest
-    #quest_selec
-    #quest_random
+# melhorar sistemas de format da quest selecionada
 
 
 # -- -- -- -- -- --
 #variaveis
-
-item=['Flor','Cordão','Balde']
-contratante=['Moça','Padre','Construtor']
-local=['Capital','Campos Verdejantes','Gabara']
-local_esp=['Residência Mill','Igreja','Ponte Strefield']
-
-#randomizer
-item_random=random.choice(item)
-contratante_random=random.choice(contratante)
-local_random=random.choice(local)
-local_esp_random=random.choice(local_esp)
 
 #lock
 its=0
@@ -46,6 +28,12 @@ local_selec=[lcs]
 lces=0
 selec_local_esp=False
 local_esp_selec=[lces]
+
+qts=0
+selec_quest=False
+quest_selec=[qts]
+qrmin=0
+qrmax=2
 
 # -- -- --
 #variaveis de texto
@@ -66,19 +54,43 @@ ret_cad='Retornando as escolhas de cadastro...'
 titulo='\n     QUESTIONS WITH QUESTS     '
 divisorias='---------------------------------'
 
-#quests
-apresentando_quest='Sua quest será...\n'
-quest_entregar='Entregue {} para {} na {} na {}.'
 
 # -- -- --
+#quests
+apresentando_quest='Sua quest será...\n'
+
+#arrays
+item=['Flor','Cordão','Balde']
+contratante=['Moça','Padre','Construtor']
+local=['Capital','Campos Verdejantes','Gabara']
+local_esp=['Residência Mill','Igreja','Ponte Strefield']
+
+quest_entregar='Entregue {} para {} na {} na {}.' #its cts lces lcs
+quest_eliminar='Eliminar {} que se encontra em {}.' # cts lcs
+quest_construir='Construir {} em {}.' # lces lcs
+
+quest_random=random.randint(qrmin,qrmax)
+quest=[
+    {'nome':'Entregar','texto':quest_entregar},
+    {'nome':'Eliminar','texto':quest_eliminar},
+    {'nome':'Construir','texto':quest_construir}
+    ]
+
+#randomizer
+item_random=random.choice(item)
+contratante_random=random.choice(contratante)
+local_random=random.choice(local)
+local_esp_random=random.choice(local_esp)
+
+
+
+# -- -- --
+#randomização
+
 def randomizando():
-    global item_random
-    global contratante_random
-    global local_random
-    global local_esp_random
     print(ast)
     print(apresentando_quest)
-    print(quest_entregar.format(item_random,contratante_random,local_esp_random,local_random))
+    print(quest[quest_random]['texto'].format(item_random,contratante_random,local_esp_random,local_random))
     print(ast)
 
 def origin_random():
@@ -86,29 +98,36 @@ def origin_random():
     global contratante_random
     global local_random
     global local_esp_random
+    global quest_random
 
     item_random=random.choice(item)
     contratante_random=random.choice(contratante)
     local_random=random.choice(local)
     local_esp_random=random.choice(local_esp)
+    quest_random=random.randint(qrmin,qrmax)
 
     global selec_item
     global selec_contratante
     global selec_local
     global selec_local_esp
+    global selec_quest
 
     selec_item=False
     selec_contratante=False
     selec_local=False
     selec_local_esp=False
+    selec_quest=False
 
-
-#randomização
 def mostrar_random():
+    global quest_random
     global item_random
     global contratante_random
     global local_random
     global local_esp_random
+    
+    if selec_quest==True:
+        print(qts)
+        quest_random=quest_selec[0]
     if selec_item==True:
         item_random=item[item_selec[0]]
     if selec_contratante==True:
@@ -120,6 +139,7 @@ def mostrar_random():
     randomizando()
     origin_random()
     voltando('menu principal')
+
 
 # -- -- --
 #cadastrar 2
@@ -195,7 +215,15 @@ def cads():
 # -- -- --
 #locks 2
 def mostrar_locks(lock_cat):
-    if lock_cat=='item':
+    if lock_cat=='quest':
+        cont_it=1
+        print(retorno_ops)
+        for quests in quest:
+            nome_quest=quests['nome']
+            print(f'{cont_it}. {nome_quest}')
+            cont_it+=1
+
+    elif lock_cat=='item':
         cont_it=1
         print(retorno_ops)
         for itens in item:
@@ -234,7 +262,22 @@ def mostrar_locks(lock_cat):
 
 
 def escolher_locks(lock_cat):
-    if lock_cat=='item':
+    if lock_cat=='quest':
+        verd=int(qrmax+1)
+        qts=int(input('Escolha o tipo de quest que irá ser a quest: '))
+        if qts>0 and qts<=verd:
+            quest_selec[0]=qts-1
+            pr=(quest[quest_selec[0]]['nome']).upper()
+            print('Quest do tipo {} selecionada!!'.format(pr))
+            global selec_quest
+            selec_quest=True
+            voltando('lockar opções')
+        elif qts==0:
+            voltando('lockar opções')
+        else:
+            print(op_inval)
+            escolher_locks('quest')
+    elif lock_cat=='item':
         verd=len(item)
         its=int(input('Escolha o item que irá fazer a quest: '))
         if its<=verd and its>0:
@@ -259,7 +302,7 @@ def escolher_locks(lock_cat):
             global selec_contratante
             selec_contratante=True
             voltando('lockar opções')
-        elif its==0:
+        elif cts==0:
             voltando('lockar opções')
         else:
             print(op_inval)
@@ -275,7 +318,7 @@ def escolher_locks(lock_cat):
             global selec_local
             selec_local=True
             voltando('lockar opções')
-        elif its==0:
+        elif lcs==0:
             voltando('lockar opções')
         else:
             print(op_inval)
@@ -291,7 +334,7 @@ def escolher_locks(lock_cat):
             global selec_local_esp
             selec_local_esp=True
             voltando('lockar opções')
-        elif its==0:
+        elif lces==0:
             voltando('lockar opções')
         else:
             print(op_inval)
@@ -322,8 +365,7 @@ def selecionar_locks():
     try:
         opcao_escolhida=int(input('Escolha uma opção: '))
         if opcao_escolhida==1:
-            print('Em breve atts...')
-            voltando('lockar opções')
+            fixar_locks('quest')
         elif opcao_escolhida==2:
             fixar_locks('item')
         elif opcao_escolhida==3:
