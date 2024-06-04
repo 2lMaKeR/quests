@@ -5,9 +5,6 @@ import os
 
 #TASKS:
 
-# melhorar UI - ajustar espaços em cada etapa
-# colocar \n em todos os inputs para separar das opções de escolha
-
 ## fazer o modulop de orientação a objetos para refatorar esse projeto em varios files
 ## ou fazer novo projeto já com esse intuito
 
@@ -48,7 +45,7 @@ op_inval='\nOpção inválida!\n'
 volte_ao='\nDigite qualquer tecla para voltar ao {}...'
 
 #cadastro
-novo_cad='Qual novo {} gostaria de cadastrar: '
+novo_cad='\nQual novo {} gostaria de cadastrar: '
 adin_lock=' {} foi adicionado a seleção!! Agora disponível para fixar.'
 ret_cad='Retornando as escolhas de cadastro...'
 
@@ -204,7 +201,7 @@ def cadastrar_cad(cad_cat):
 #cadastrar
 def exibir_cad():
     print('Selecione a variável de que desejar cadastrar:')
-    print('1. Item')
+    print('\n1. Item')
     print('2. Contratante')
     print('3. Local')
     print('4. Local específico')
@@ -212,6 +209,7 @@ def exibir_cad():
 
 def selecionar_cad():
     try:
+        print(divisorias)
         opcao_escolhida=int(input('Escolha uma opção: '))
         if opcao_escolhida==1:
             cadastrar_cad('Item')
@@ -286,6 +284,7 @@ def mostrar_locks(lock_cat):
 def escolher_locks(lock_cat):
     if lock_cat=='quest':
         verd=int(qrmax+1)
+        print(divisorias)
         qts=int(input('Escolha o tipo de quest que irá ser a quest: '))
         if qts>0 and qts<=verd:
             quest_selec[0]=qts-1
@@ -301,6 +300,7 @@ def escolher_locks(lock_cat):
             escolher_locks('quest')
     elif lock_cat=='item':
         verd=len(item)
+        print(divisorias)
         its=int(input('Escolha o item que irá fazer a quest: '))
         if its<=verd and its>0:
             item_selec[0]=(its-1)
@@ -316,6 +316,7 @@ def escolher_locks(lock_cat):
             escolher_locks('item')
     elif lock_cat=='contratante':
         verd=len(contratante)
+        print(divisorias)
         cts=int(input('Escolha o contratante que irá fazer a quest: '))
         if cts<=verd and cts>0:
             contratante_selec[0]=(cts-1)
@@ -332,6 +333,7 @@ def escolher_locks(lock_cat):
 
     elif lock_cat=='local':
         verd=len(local)
+        print(divisorias)
         lcs=int(input('Escolha o local que irá fazer a quest: '))
         if lcs<=verd and lcs>0:
             local_selec[0]=(lcs-1)
@@ -348,6 +350,7 @@ def escolher_locks(lock_cat):
 
     elif lock_cat=='local especifico':
         verd=len(local_esp)
+        print(divisorias)
         lces=int(input('Escolha o local específico que irá fazer a quest: '))
         if lces<=verd and lces>0:
             local_esp_selec[0]=(lces-1)
@@ -376,7 +379,7 @@ def fixar_locks(look_cat):
 
 def exibir_locks():
     print('Selecione a variável de que desejar fixar:')
-    print('1. Tipo de quest')
+    print('\n1. Tipo de quest')
     print('2. Item')
     print('3. Contratante')
     print('4. Local')
@@ -385,6 +388,7 @@ def exibir_locks():
 
 def selecionar_locks():
     try:
+        print(divisorias)
         opcao_escolhida=int(input('Escolha uma opção: '))
         if opcao_escolhida==1:
             fixar_locks('quest')
@@ -421,7 +425,8 @@ def exibir_opcoes():
 
 def selecionar_opcoes():
     try:
-        opcao_escolhida=int(input('Escolha uma opção: '))
+        print(divisorias)
+        opcao_escolhida=int(input('\nEscolha uma opção: '))
         if opcao_escolhida==1:
             mostrar_random()
         elif opcao_escolhida==2:
