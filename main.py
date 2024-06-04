@@ -82,26 +82,35 @@ contratante_random=random.choice(contratante)
 local_random=random.choice(local)
 local_esp_random=random.choice(local_esp)
 
-
-
+var1=item_random
+var2=contratante_random
+var3=local_esp_random
+var4=local_random
+vares=[var1,var2,var3,var4]
 # -- -- --
 #randomização
 
 def randomizando():
     print(ast)
     print(apresentando_quest)
+    global var1,var2,var3,var4
     match quest_random:
         case 0: # entregar
-            print(quest[quest_random]['texto'].format(item_random,contratante_random,local_esp_random,local_random))
+            var1=item_random
+            var2=contratante_random
+            var3=local_esp_random
+            var4=local_random
         case 1: # eliminar
-            print(quest[quest_random]['texto'].format(contratante_random,local_random))
+            var1=contratante_random
+            var2=local_random
         case 2: # construir
-            print(quest[quest_random]['texto'].format(local_esp_random,local_random))
+            var1=local_esp_random
+            var2=local_random
         case _:
             print(ast)
             print('ERRO def randomizando')
             print(ast)
-
+    print(quest[quest_random]['texto'].format(var1,var2,var3,var4))
     print(ast)
 
 def origin_random():
