@@ -145,7 +145,6 @@ def mostrar_random():
     global local_esp_random
     
     if selec_quest==True:
-        print(qts)
         quest_random=quest_selec[0]
     if selec_item==True:
         item_random=item[item_selec[0]]
