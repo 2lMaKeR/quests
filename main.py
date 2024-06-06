@@ -8,6 +8,8 @@ import os
 ## fazer o modulop de orientação a objetos para refatorar esse projeto em varios files
 ## ou fazer novo projeto já com esse intuito
 
+## ficha de cadastro que gera excel no save
+
 # -- -- -- -- -- --
 #variaveis
 
